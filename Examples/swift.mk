@@ -18,7 +18,8 @@ include $(SDK)/C_API/buildsupport/common.mk
 # 1. the presence of a TOOLCHAINS environment value
 # 2. a Swift toolchain installed for the current user (e.g. 'Install for me only')
 # 3. a Swift toolchain installed for all users (e.g. 'Install for all users on this computer')
-RELATIVE_TOOLCHAIN_PATH = Library/Developer/Toolchains/swift-latest.xctoolchain
+# RELATIVE_TOOLCHAIN_PATH = Library/Developer/Toolchains/swift-latest.xctoolchain
+RELATIVE_TOOLCHAIN_PATH = Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2024-07-29-a.xctoolchain
 ifneq ($(TOOLCHAINS),)
 else ifneq ($(wildcard $(HOME)/$(RELATIVE_TOOLCHAIN_PATH)),)
 TOOLCHAINS = $(shell plutil -extract CFBundleIdentifier raw -o - $(HOME)/$(RELATIVE_TOOLCHAIN_PATH)/Info.plist)
@@ -44,7 +45,7 @@ SWIFT_FLAGS := \
 	-enable-experimental-feature NoncopyableGenerics \
 	-Xfrontend -disable-stack-protector \
 	-Xfrontend -function-sections \
-	-swift-version 6 \
+	-swift-version 5 \
 	-Xcc -DTARGET_EXTENSION \
 	-module-cache-path build/module-cache \
 	-I $(SDK)/C_API \
