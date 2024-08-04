@@ -7,9 +7,10 @@ struct Sprites: ~Copyable {
 struct Game: ~Copyable {
     
     private var sprites: Sprites
+    // sound playerを用意
+    private var soundPlayer: FilePlayer = FilePlayer()
 
     init() {
-        // Setup the device before any other operations.
         srand(System.getSecondsSinceEpoch(milliseconds: nil))
         Display.setRefreshRate(rate: 50)
         
@@ -20,12 +21,25 @@ struct Game: ~Copyable {
         
         Sprite.drawSprites()
 
-        // これを設定しないとaccelerometerは更新されなかった
         System.setPeripheralsEnabled(mask: PDPeripherals(rawValue: 1))
+        
+        // mp3の読み込み
+        soundPlayer.loadIntoPlayer(path: "atsumori_op")
     }
     
     mutating func updateGame() {
         Sprite.updateAndDrawSprites()
+        
+        let current = System.buttonState.current
+        if current == .a {
+            if soundPlayer.isPlaying {
+                soundPlayer.pause()
+            } else {
+                soundPlayer.play(loop: 0)
+            }
+        } else if current == .b {
+            soundPlayer.pause()
+        }
         
         let (accelX, accelY, accelZ) = System.accelerometer
         

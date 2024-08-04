@@ -23,19 +23,20 @@ extension Sprite {
                 -5.0
             } else if current != .left, current == .right {
                 5.0
-            } else {
+            } else if System.isCrankDocked {
                 accelX.clamp(min: -5.0, max: 5.0)
-//                System.crankChange
+            } else {
+                System.crankChange
             }
             
             let dy: Float = if current == .up, current != .down {
                 -5.0
             } else if current != .up, current == .down {
                 5.0
-            } else {
+            } else if !System.isCrankDocked {
                 accelY.clamp(min: -5.0, max: 5.0)
-//                System.crankChange
-//                0
+            } else {
+                0
             }
             
             let (x, y) = sprite.position
