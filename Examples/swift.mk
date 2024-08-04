@@ -19,7 +19,7 @@ include $(SDK)/C_API/buildsupport/common.mk
 # 2. a Swift toolchain installed for the current user (e.g. 'Install for me only')
 # 3. a Swift toolchain installed for all users (e.g. 'Install for all users on this computer')
 # RELATIVE_TOOLCHAIN_PATH = Library/Developer/Toolchains/swift-latest.xctoolchain
-RELATIVE_TOOLCHAIN_PATH = Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2024-07-29-a.xctoolchain
+RELATIVE_TOOLCHAIN_PATH = Library/Developer/Toolchains/swift-6.0-DEVELOPMENT-SNAPSHOT-2024-08-02-a.xctoolchain
 ifneq ($(TOOLCHAINS),)
 else ifneq ($(wildcard $(HOME)/$(RELATIVE_TOOLCHAIN_PATH)),)
 TOOLCHAINS = $(shell plutil -extract CFBundleIdentifier raw -o - $(HOME)/$(RELATIVE_TOOLCHAIN_PATH)/Info.plist)

@@ -39,7 +39,7 @@ extension Graphics {
   /// Note that text drawing uses bitmaps, so this affects how fonts are
   /// displayed as well.
   public static func setDrawMode(mode: LCDBitmapDrawMode) {
-    graphicsAPI.setDrawMode.unsafelyUnwrapped(mode)
+    _ = graphicsAPI.setDrawMode.unsafelyUnwrapped(mode)
   }
 
   /// Sets the current clip rect, using world coordinates.
@@ -84,6 +84,31 @@ extension Graphics {
   public static func setTextLeading(leading: Int32) {
     graphicsAPI.setTextLeading.unsafelyUnwrapped(leading)
   }
+}
+
+// MARK: - Text
+extension Graphics {
+    ///
+    public static func drawText(_ text: StaticString, x: Int32, y: Int32) {
+        _ = graphicsAPI.drawText.unsafelyUnwrapped(
+            text.utf8Start,
+            text.utf8CodeUnitCount,
+            .kUTF8Encoding,
+            x,
+            y
+        )
+    }
+    
+    public static func drawText(_ text: [CChar], x: Int32, y: Int32) {
+        _ = graphicsAPI.drawText.unsafelyUnwrapped(
+            text,
+            text.count,
+            .kUTF8Encoding,
+            x,
+            y
+        )
+    }
+
 }
 
 // MARK: - Bitmaps
